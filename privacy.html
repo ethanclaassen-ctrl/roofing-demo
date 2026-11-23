@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- {{companyName}} and the other {{...}} / data-cfg bits are filled in from src/config.js by vite.config.js -->
+  <title>Privacy notice | {{companyName}}</title>
+  <meta name="description" content="How {{companyName}} handles the details you send us." />
+  <meta name="theme-color" content="#18181b" />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%23D97706'/%3E%3Cpath d='M12 4 3 12h2.5v7h13v-7H21L12 4Z' fill='white'/%3E%3C/svg%3E" />
+  <!-- Same stylesheet as the main page, so it looks like the rest of the site. No JavaScript is needed here. -->
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body class="font-sans">
+
+  <!-- HEADER: logo and name link back to the home page -->
+  <header class="mx-auto flex max-w-3xl items-center justify-between px-4 py-5">
+    <a href="/" class="flex items-center gap-2 text-lg font-extrabold tracking-tight">
+      <span class="grid h-9 w-9 place-items-center rounded-lg bg-accent" aria-hidden="true">
+        <svg viewBox="0 0 24 24" class="h-5 w-5"><path d="M12 3 2 12h3v8h14v-8h3L12 3Zm0 3.2 6 5.4V18H6v-6.4l6-5.4Z"/></svg>
+      </span>
+      <span data-cfg="companyName"></span>
+    </a>
+    <a href="/" class="text-sm font-semibold text-white/75 hover:text-white">&larr; Back to site</a>
+  </header>
+
+  <!-- THE NOTICE: one white card, short sections in plain English -->
+  <main class="mx-auto max-w-3xl px-4 pb-20">
+    <article class="rounded-3xl bg-white p-6 text-ink shadow-2xl shadow-black/40 sm:p-10">
+      <h1 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Privacy notice</h1>
+      <p class="mt-2 text-sm text-slate-500">Last updated: 10 November 2026</p>
+
+      <div class="mt-8 space-y-7 leading-relaxed text-slate-700 [&_h2]:text-lg [&_h2]:font-bold [&_h2]:text-ink [&_a]:font-semibold [&_a]:text-amber-800 [&_a]:underline">
+        <p>This notice explains how <strong><span data-cfg="companyName"></span></strong> handles the personal details you send us through this website. We follow South Africa's Protection of Personal Information Act (POPIA).</p>
+
+        <section>
+          <h2>What we collect</h2>
+          <p class="mt-2">When you fill in our enquiry form, we collect your <strong>name</strong>, <strong>phone number</strong>, <strong>suburb</strong>, the <strong>message</strong> you write, and any <strong>photos</strong> you choose to add. Photos are optional.</p>
+        </section>
+
+        <section>
+          <h2>Why we collect it</h2>
+          <p class="mt-2">Only to respond to your enquiry: to call or message you back, understand the problem with your roof, and give you a quote. We do not sell your details or use them for unrelated marketing.</p>
+        </section>
+
+        <section>
+          <h2>Who sees it</h2>
+          <p class="mt-2">Only <span data-cfg="companyName"></span> and the service providers that help us run this website and receive enquiries (for example, our website host and database provider). They may only use your details to provide that service to us.</p>
+        </section>
+
+        <section>
+          <h2>How long we keep it</h2>
+          <p class="mt-2">We keep your details only for as long as we need them to deal with your enquiry and any work that follows. After that, we delete them.</p>
+        </section>
+
+        <section>
+          <h2>Your rights</h2>
+          <p class="mt-2">You may ask us to show you the details we hold about you, to correct them, or to delete them. Just email us at <a data-cfg-href="mailto"><span data-cfg="email"></span></a> and we will help you.</p>
+        </section>
+
+        <section>
+          <h2>Complaints</h2>
+          <p class="mt-2">If you are unhappy with how we handled your details, please contact us first so we can put it right. You also have the right to complain to South Africa's <a href="https://inforegulator.org.za/" target="_blank" rel="noopener">Information Regulator</a>.</p>
+        </section>
+
+        <section>
+          <h2>Contact us</h2>
+          <p class="mt-2"><span data-cfg="companyName"></span><br />
+            Email: <a data-cfg-href="mailto"><span data-cfg="email"></span></a><br />
+            Phone: <a data-cfg-href="tel"><span data-cfg="phoneDisplay"></span></a></p>
+        </section>
+      </div>
+    </article>
+  </main>
+</body>
+</html>

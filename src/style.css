@@ -1,0 +1,54 @@
+/* style.css: loads Tailwind and defines our small custom pieces. */
+@import "tailwindcss";
+
+/* Theme tokens: Tailwind turns these into classes like bg-ink, text-accent, etc. */
+@theme {
+  --color-ink: #18181b;       /* charcoal (zinc-900), main dark colour */
+  --color-slate-deep: #27272a;
+  --color-sand: #f5f3ef;      /* warm off-white for light sections */
+  --color-accent: var(--accent, #D97706); /* set from config.js at runtime */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--color-ink); color: #fff; -webkit-font-smoothing: antialiased; }
+
+/* Respect people who have asked their phone to reduce motion. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation: none !important; transition: none !important; }
+}
+
+/* ---- Hero video fade-in: the poster image shows instantly, the video fades in over it once it is playing ---- */
+#hero-video { opacity: 0; transition: opacity 1.2s ease; }
+#hero-video.is-playing { opacity: 1; }
+
+/* ---- Before/after slider ----
+   Two images are stacked. The top ("before") is clipped from the right using a CSS variable (--pos)
+   that the range input updates. No heavy library needed. */
+.ba { --pos: 50%; position: relative; overflow: hidden; touch-action: pan-y; user-select: none; }
+.ba .ba-top { clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
+.ba .ba-handle { left: var(--pos); }
+.ba input[type="range"] {
+  position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; margin: 0;
+}
+
+/* ---- Glass card: blur only on larger screens (blur is expensive on phones) ---- */
+.glass { background: rgba(255, 255, 255, 0.96); }
+@media (min-width: 900px) {
+  .glass { background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(14px); }
+}
+
+/* Inputs share one look */
+.field {
+  width: 100%; border: 1px solid #d5d9e0; background: #fff; color: #18181b;
+  border-radius: 0.75rem; padding: 0.8rem 0.9rem; font-size: 1rem; /* 16px stops iPhone zoom-on-focus */
+}
+.field:focus { outline: 2px solid var(--color-accent); outline-offset: 1px; border-color: transparent; }
+
+/* The honeypot field is hidden from people but bots fill it in. If it has text, we drop the lead. */
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* Amber is a light colour, so text sitting on it is charcoal (white on amber fails contrast). */
+.bg-accent { color: var(--color-ink) !important; }
+.bg-accent svg { fill: var(--color-ink); }

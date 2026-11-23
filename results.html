@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Private page: keep it out of Google, and never send this page's address (which holds the key) to other sites. -->
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="referrer" content="no-referrer" />
+  <title>Your results | {{companyName}}</title>
+  <meta name="theme-color" content="#18181b" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%23D97706'/%3E%3Cpath d='M12 4 3 12h2.5v7h13v-7H21L12 4Z' fill='white'/%3E%3C/svg%3E" />
+</head>
+<body class="font-sans">
+
+  <!-- HEADER: company name, filled in from src/config.js at build time -->
+  <header class="mx-auto flex max-w-3xl items-center gap-2 px-4 py-5 text-lg font-extrabold tracking-tight">
+    <span class="grid h-9 w-9 place-items-center rounded-lg bg-accent" aria-hidden="true">
+      <svg viewBox="0 0 24 24" class="h-5 w-5"><path d="M12 3 2 12h3v8h14v-8h3L12 3Zm0 3.2 6 5.4V18H6v-6.4l6-5.4Z"/></svg>
+    </span>
+    <span data-cfg="companyName"></span>
+  </header>
+
+  <main class="mx-auto max-w-3xl px-4 pb-16">
+    <h1 class="text-3xl font-extrabold tracking-tight">Your results</h1>
+
+    <!-- STATUS: "Loading..." first, then either hidden or "This link is not valid." -->
+    <p id="status" class="mt-6 rounded-2xl bg-white/5 p-5 text-white/80 ring-1 ring-white/10" role="status" aria-live="polite">Loading your results...</p>
+
+    <!-- RESULTS: hidden until the data arrives. src/results.js fills every empty box below. -->
+    <div id="results" class="hidden">
+      <!-- Four big number cards -->
+      <div class="mt-6 grid grid-cols-2 gap-3">
+        <div class="rounded-2xl bg-accent p-4"><p id="n-month" class="text-4xl font-extrabold"></p><p class="mt-1 text-sm font-semibold">Leads this month</p></div>
+        <div class="rounded-2xl bg-white p-4 text-ink"><p id="n-7" class="text-4xl font-extrabold"></p><p class="mt-1 text-sm font-semibold text-slate-600">Last 7 days</p></div>
+        <div class="rounded-2xl bg-white p-4 text-ink"><p id="n-30" class="text-4xl font-extrabold"></p><p class="mt-1 text-sm font-semibold text-slate-600">Last 30 days</p></div>
+        <div class="rounded-2xl bg-white p-4 text-ink"><p id="n-speed" class="text-4xl font-extrabold"></p><p class="mt-1 text-sm font-semibold text-slate-600">Average alert speed (seconds)*</p></div>
+      </div>
+
+      <!-- 30-day bar chart: one plain div per day, its height set as a percentage of the busiest day -->
+      <section class="mt-8 rounded-2xl bg-white/5 p-5 ring-1 ring-white/10">
+        <h2 class="font-bold">Leads per day, last 30 days</h2>
+        <div id="daily" class="mt-4 flex h-40 items-end gap-[2px]" role="img"></div>
+        <div class="mt-2 flex justify-between text-xs text-white/60"><span id="daily-first"></span><span>Today</span></div>
+      </section>
+
+      <!-- Two lists side by side on bigger screens, stacked on phones -->
+      <div class="mt-6 grid gap-6 sm:grid-cols-2">
+        <section class="rounded-2xl bg-white/5 p-5 ring-1 ring-white/10">
+          <h2 class="font-bold">Top suburbs (30 days)</h2>
+          <ul id="suburbs" class="mt-3 space-y-2"></ul>
+        </section>
+        <section class="rounded-2xl bg-white/5 p-5 ring-1 ring-white/10">
+          <h2 class="font-bold">By service (30 days)</h2>
+          <ul id="services" class="mt-3 space-y-2"></ul>
+        </section>
+      </div>
+
+      <!-- Busiest hours: a small row of 24 bars, midnight to 11pm -->
+      <section class="mt-6 rounded-2xl bg-white/5 p-5 ring-1 ring-white/10">
+        <h2 class="font-bold">Busiest hours (30 days)</h2>
+        <div id="hours" class="mt-4 flex h-16 items-end gap-[2px]" role="img"></div>
+        <div class="mt-2 flex justify-between text-xs text-white/60"><span>00:00</span><span>12:00</span><span>23:00</span></div>
+      </section>
+
+      <!-- Footnote explaining what "alert speed" means -->
+      <p class="mt-6 text-sm text-white/60">* Alert speed is the time from the enquiry being submitted to the alert being sent. It is not the contractor's reply time.</p>
+    </div>
+  </main>
+
+  <script type="module" src="/src/results.js"></script>
+</body>
+</html>
